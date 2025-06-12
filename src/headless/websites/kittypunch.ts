@@ -13,7 +13,7 @@ export class KittyPunch {
         return url;
     }
 
-    constructor(private readonly browser: HeadlessBrowser) {}
+    constructor(private readonly browser: HeadlessBrowser) { }
 
     async openSwapFlowToUsdfUrl() {
         logWithTimestamp("Opening swap page for FLOW to USDF...");
@@ -34,8 +34,8 @@ export class KittyPunch {
         }
         logWithTimestamp("Clicking 'Connect Wallet' button...");
         await connectBtn.click();
-        logWithTimestamp("Selecting MetaMask wallet option...");
-        await page.getByTestId("rk-wallet-option-io.metamask").click();
+        logWithTimestamp("Selecting installed wallet option...");
+        await page.getByTestId(/rk-wallet-option-(com|io)\.*/).first().click();
         logWithTimestamp("Waiting for wallet notification and confirming...");
         // wait for notification page to be opened
         await this.browser.waitForNotificationPageAndClickConfirm();
@@ -51,6 +51,7 @@ export class KittyPunch {
         await page.waitForLoadState("networkidle");
         logWithTimestamp(`Page loaded, clicking amount button: ${amountButtonText}`);
         // Input amount
+        await page.getByRole("button", { name: amountButtonText }).isEnabled();
         await page.getByRole("button", { name: amountButtonText }).click();
         logWithTimestamp("Amount button clicked.");
         // Get swap button

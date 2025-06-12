@@ -39,6 +39,8 @@ jobs:
             MAINNET_QUICKNODE_URL: ${{ secrets.MAINNET_QUICKNODE_URL }}
             CHROME_METAMASK_PASSWORD: ${{ secrets.CHROME_METAMASK_PASSWORD }}
             CHROME_METAMASK_MNEMONIC: ${{ secrets.CHROME_METAMASK_MNEMONIC }}
+            FLOW_WALLET_USERNAME: ${{ vars.FLOW_WALLET_USERNAME }}
+            FLOW_WALLET_MNEMONIC: ${{ secrets.FLOW_WALLET_MNEMONIC }}
 
         steps:
             # checkout current branch
@@ -53,6 +55,9 @@ jobs:
 
             - name: Download Extensions
               run: ./scripts/download_metamask.sh
+
+            - name: Download Flow Wallet Extension
+              run: ./scripts/download_flowwallet.sh
 
             - uses: oven-sh/setup-bun@v2
 

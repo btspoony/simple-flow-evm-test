@@ -43,7 +43,7 @@ const runners = [
     },
     {
         providerKey: undefined,
-        tasks: ["headless-kittypunch-swap-1", "headless-kittypunch-swap-2"],
+        tasks: ["headless-kittypunch-swap-1", "headless-kittypunch-swap-2", "headless-kittypunch-swap-3", "headless-kittypunch-swap-4"],
         network: "mainnet",
     },
 ];
